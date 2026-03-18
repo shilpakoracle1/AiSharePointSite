@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: transparent; padding: 12px; }
+  .block { background: #fff; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; max-width: 100%; }
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: #f3f2f1; border-bottom: 1px solid #e1e1e1; }
+  .label { font-size: 11px; font-weight: 600; color: #605e5c; letter-spacing: .05em; text-transform: uppercase; }
+  .copy-btn { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border: 1px solid #0078d4; border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; color: #0078d4; font-family: 'Segoe UI', sans-serif; font-weight: 600; }
+  .copy-btn:hover { background: #f3f2f1; }
+  .prompt-body { padding: 14px 16px; }
+  .prompt-text { font-size: 13px; line-height: 1.7; color: #201f1e; white-space: pre-wrap; font-family: Consolas, Menlo, monospace; }
+</style>
+</head>
+<body>
+<div class="block">
+  <div class="header">
+    <span class="label">Prompt</span>
+    <button class="copy-btn" onclick="copyPrompt()">
+      <svg id="icon-copy" width="13" height="13" viewBox="0 0 16 16" fill="none">
+        <rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      <svg id="icon-check" width="13" height="13" viewBox="0 0 16 16" fill="none" style="display:none;color:#107c10;">
+        <path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span id="copy-label">Copy prompt</span>
+    </button>
+  </div>
+  <div class="prompt-body">
+    <p id="prompt-text" class="prompt-text">YOUR PROMPT TEXT HERE</p>
+  </div>
+</div>
+
+<script>
+function copyPrompt() {
+  const text = document.getElementById('prompt-text').innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    document.getElementById('icon-copy').style.display = 'none';
+    document.getElementById('icon-check').style.display = 'block';
+    document.getElementById('copy-label').textContent = 'Copied!';
+    document.getElementById('copy-label').style.color = '#107c10';
+    setTimeout(function() {
+      document.getElementById('icon-copy').style.display = 'block';
+      document.getElementById('icon-check').style.display = 'none';
+      document.getElementById('copy-label').textContent = 'Copy prompt';
+      document.getElementById('copy-label').style.color = '';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
