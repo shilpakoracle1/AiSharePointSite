@@ -5,49 +5,166 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', sans-serif; background: transparent; padding: 12px; }
-  .block { background: #fff; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; max-width: 100%; }
-  .header { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: #f3f2f1; border-bottom: 1px solid #e1e1e1; }
-  .label { font-size: 11px; font-weight: 600; color: #605e5c; letter-spacing: .05em; text-transform: uppercase; }
-  .copy-btn { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border: 1px solid #0078d4; border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; color: #0078d4; font-family: 'Segoe UI', sans-serif; font-weight: 600; }
+  body { font-family: 'Segoe UI', sans-serif; background: transparent; padding: 8px 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
+  .card { display: flex; flex-direction: column; gap: 8px; }
+  .card-title { font-size: 14px; font-weight: 700; color: #201f1e; }
+  .card-desc { font-size: 13px; line-height: 1.6; color: #444; flex: 1; }
+  .copy-btn {
+    margin-top: 6px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border: 1px solid #c8c6c4;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    color: #323130;
+    font-family: 'Segoe UI', sans-serif;
+  }
   .copy-btn:hover { background: #f3f2f1; }
-  .prompt-body { padding: 14px 16px; }
-  .prompt-text { font-size: 13px; line-height: 1.7; color: #201f1e; white-space: pre-wrap; font-family: Consolas, Menlo, monospace; }
+  .copied { color: #107c10; border-color: #107c10; }
 </style>
 </head>
 <body>
-<div class="block">
-  <div class="header">
-    <span class="label">Prompt</span>
-    <button class="copy-btn" onclick="copyPrompt()">
-      <svg id="icon-copy" width="13" height="13" viewBox="0 0 16 16" fill="none">
-        <rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/>
-      </svg>
-      <svg id="icon-check" width="13" height="13" viewBox="0 0 16 16" fill="none" style="display:none;color:#107c10;">
-        <path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span id="copy-label">Copy prompt</span>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-title">Meeting summary</div>
+    <div class="card-desc">Summarize these meeting notes and create a list of action items and decisions.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Summarize these meeting notes and create a list of action items and decisions.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
     </button>
   </div>
-  <div class="prompt-body">
-    <p id="prompt-text" class="prompt-text">YOUR PROMPT TEXT HERE</p>
+
+  <div class="card">
+    <div class="card-title">Email draft</div>
+    <div class="card-desc">Write a professional email summarizing this project update for leadership.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Write a professional email summarizing this project update for leadership.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
   </div>
+
+  <div class="card">
+    <div class="card-title">Document summary</div>
+    <div class="card-desc">Summarize this report in five key bullet points and highlight any risks.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Summarize this report in five key bullet points and highlight any risks.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Code explanation</div>
+    <div class="card-desc">Explain what this code does and identify potential improvements.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Explain what this code does and identify potential improvements.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
 </div>
 
 <script>
-function copyPrompt() {
-  const text = document.getElementById('prompt-text').innerText;
+function copyText(btn, text) {
   navigator.clipboard.writeText(text).then(function() {
-    document.getElementById('icon-copy').style.display = 'none';
-    document.getElementById('icon-check').style.display = 'block';
-    document.getElementById('copy-label').textContent = 'Copied!';
-    document.getElementById('copy-label').style.color = '#107c10';
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent = 'Copied!';
     setTimeout(function() {
-      document.getElementById('icon-copy').style.display = 'block';
-      document.getElementById('icon-check').style.display = 'none';
-      document.getElementById('copy-label').textContent = 'Copy prompt';
-      document.getElementById('copy-label').style.color = '';
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent = 'Copy';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: transparent; padding: 8px 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
+  .card { display: flex; flex-direction: column; gap: 8px; }
+  .card-title { font-size: 14px; font-weight: 700; color: #201f1e; }
+  .card-desc { font-size: 13px; line-height: 1.6; color: #444; flex: 1; }
+  .copy-btn {
+    margin-top: 6px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border: 1px solid #c8c6c4;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    color: #323130;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .copy-btn:hover { background: #f3f2f1; }
+  .copied { color: #107c10; border-color: #107c10; }
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-title">Meeting summary</div>
+    <div class="card-desc">Summarize these meeting notes and create a list of action items and decisions.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Summarize these meeting notes and create a list of action items and decisions.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Email draft</div>
+    <div class="card-desc">Write a professional email summarizing this project update for leadership.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Write a professional email summarizing this project update for leadership.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Document summary</div>
+    <div class="card-desc">Summarize this report in five key bullet points and highlight any risks.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Summarize this report in five key bullet points and highlight any risks.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Code explanation</div>
+    <div class="card-desc">Explain what this code does and identify potential improvements.</div>
+    <button class="copy-btn" onclick="copyText(this, 'Explain what this code does and identify potential improvements.')">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 10.5H2.5A1 1 0 0 1 1.5 9.5V2.5A1 1 0 0 1 2.5 1.5H9.5A1 1 0 0 1 10.5 2.5V3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
+</div>
+
+<script>
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent = 'Copied!';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent = 'Copy';
     }, 2000);
   });
 }
